@@ -1,121 +1,103 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>מרכז לניהול תחזוקת מטוסים • אל‑על</title>
-
-<!-- Tableau JS API -->
-<script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
-
-<!-- =====  CSS  ===== -->
-<style>
-/* Reset קצר + בסיס */
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{
-  min-height:100vh;
-  color:#fff;
-  text-align:center;
-  background:url("img/plane.jpg") center/cover fixed no-repeat;
-}
-
-/* שכבת כיסוי (כחול‑לבן שקוף קל) */
-body::before{
-  content:"";
-  position:fixed;inset:0;
-  background:linear-gradient(180deg,rgba(0,77,162,.8) 0%,rgba(255,255,255,.4) 100%);
-  pointer-events:none;z-index:-1;
-}
-
-/* כותרת */
-header{padding:70px 15px 40px}
-header h1{font-size:clamp(28px,5vw,46px);margin-bottom:12px;font-weight:900}
-header p{font-size:clamp(14px,2vw,20px);opacity:.9}
-
-/* כפתורים */
-nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:35px 0}
-button.navBtn{
-  background:#ffffffcc;color:#0d47a1;border:none;border-radius:30px;
-  padding:12px 28px;cursor:pointer;font-weight:700;font-size:17px;
-  transition:.25s;box-shadow:0 3px 10px rgba(0,0,0,.25)
-}
-button.navBtn:hover,
-button.navBtn:focus{transform:translateY(-3px);outline:none;background:#fff}
-button.navBtn.active{background:#ffeb3b;color:#000}
-
-/* תיבת Tableau */
-#viz{
-  width:95%;max-width:1250px;height:650px;margin:0 auto 80px;
-  background:#eef4ff;border-radius:14px;overflow:hidden;
-  box-shadow:0 6px 25px rgba(0,0,0,.35)
-}
-
-/* כפתור “למעלה” */
-#toTop{
-  position:fixed;right:18px;bottom:18px;width:46px;height:46px;
-  background:#ffeb3b;color:#000;border:none;border-radius:50%;cursor:pointer;
-  display:none;align-items:center;justify-content:center;font-size:22px;
-  box-shadow:0 4px 15px rgba(0,0,0,.4);z-index:1000
-}
-#toTop:hover{transform:scale(1.1)}
-footer{padding:18px 0;font-size:14px;color:#e0f2ff}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>מרכז תחזוקת מטוסים • אל־על</title>
+  <script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+  <style>
+    /* --- העיצוב שלך --- */
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+    body{
+      min-height:100vh;
+      color:#fff;
+      text-align:center;
+      background:url("img/plane.jpg") center/cover fixed no-repeat;
+    }
+    body::before{
+      content:"";position:fixed;inset:0;
+      background:linear-gradient(180deg,rgba(0,77,162,.8),rgba(255,255,255,.4));
+      pointer-events:none;z-index:-1;
+    }
+    header{padding:60px 10px;text-shadow:0 2px 6px rgba(0,0,0,.3)}
+    header h1{font-size:clamp(26px,5vw,40px)}
+    nav{margin:30px 0;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+    .navBtn{
+      background:#fff;color:#0d47a1;border:none;border-radius:25px;
+      padding:12px 26px;font-weight:700;cursor:pointer;transition:.2s;
+      box-shadow:0 3px 10px rgba(0,0,0,.2)
+    }
+    .navBtn.active{background:#ffc400;color:#000}
+    .navBtn:hover{transform:translateY(-3px)}
+    #viz{width:90%;max-width:1250px;height:650px;margin:0 auto 60px;
+         border-radius:12px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.4);
+         background:#fff}
+    #toTop{
+      position:fixed;right:20px;bottom:20px;width:48px;height:48px;
+      background:#ffc400;color:#000;border:none;border-radius:50%;
+      cursor:pointer;display:none;align-items:center;justify-content:center;
+      font-size:22px;box-shadow:0 4px 15px rgba(0,0,0,.4)
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>מרכז לניהול תחזוקת מטוסים של אל על</h1>
-  <p>בחר דשבורד בהתאם לצורך ✈️</p>
-</header>
+  <header>
+    <h1>📊 מרכז ניהול תחזוקת מטוסים – אל־על</h1>
+    <p>בחר דשבורד להצגה:</p>
+  </header>
 
-<!-- כפתורי ניווט -->
-<nav>
-  <button class="navBtn active" data-sheet="ExecDash">דשבורד לצוות אחזקה</button>
-  <button class="navBtn"          data-sheet="OpsDash" >דשבורד למנהלים בכירים</button>
-  <button class="navBtn"          data-sheet="FinDash" >דשבורד למנהלי כספים</button>
-</nav>
+  <!-- שלושת הכפתורים, כשבכל data-urlאת ה‑src שמעתיק מ‑Embed -->
+  <nav>
+    <button class="navBtn active"
+      data-url="https://public.tableau.com/views/_17524132254990/דשבורדתפעולילצוותאחזקה?:showVizHome=no&:embed=true&:toolbar=no">
+      דשבורד לצוות אחזקה
+    </button>
 
-<!-- Tableau Container -->
-<div id="viz" role="region" aria-label="Tableau Dashboard"></div>
+    <button class="navBtn"
+      data-url="https://public.tableau.com/views/_17524132254990/דשבורדניהולילמנהליםבכירים?:showVizHome=no&:embed=true&:toolbar=no">
+      דשבורד למנהלים בכירים
+    </button>
 
-<!-- כפתור למעלה -->
-<button id="toTop" aria-label="חזרה לראש הדף">⬆️</button>
+    <button class="navBtn"
+      data-url="https://public.tableau.com/views/_17524132254990/דשבורדכלכלילמנהליכספים?:showVizHome=no&:embed=true&:toolbar=no">
+      דשבורד למנהלי כספים
+    </button>
+  </nav>
 
-<footer>© 2025 El Al Airlines • Aircraft Maintenance BI Portal</footer>
+  <!-- כאן נטען ה‑Viz -->
+  <div id="viz"></div>
+  <button id="toTop" aria-label="חזרה למעלה">⬆️</button>
 
-<!-- =====  JS  ===== -->
-<script>
-/* קישור בסיסי ל‑Workbook שלך */
-const base  = "https://public.tableau.com/views/_17524132254990/sheet7";
-const prms  = "?:showVizHome=no&:embed=true&:toolbar=no";
+  <script>
+    const vizDiv = document.getElementById("viz");
+    let   vizObj = null;
 
-const vizDiv=document.getElementById("viz");
-let   vizObj=null;
+    // טוען/מפנה קודם ואז יוצר Viz חדש
+    function loadViz(url){
+      if (vizObj) vizObj.dispose();
+      vizObj = new tableau.Viz(vizDiv, url);
+    }
 
-/* טעינה/החלפה */
-function loadDashboard(sheetName){
-  if(vizObj){vizObj.dispose();vizObj=null;}
-  const url=`${base}${prms}&:sheet=${sheetName}`;
-  vizObj=new tableau.Viz(vizDiv,url,{width:"100%",height:"100%"});
-}
+    // התקנה ראשונית
+    loadViz(document.querySelector(".navBtn.active").dataset.url);
 
-/* טיפול בכפתורים */
-document.querySelectorAll(".navBtn").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll(".navBtn").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    loadDashboard(btn.dataset.sheet);
-  });
-});
+    // טיפול בכפתורים
+    document.querySelectorAll(".navBtn").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        // סגנון פעיל
+        document.querySelectorAll(".navBtn").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+        // טעינה
+        loadViz(btn.dataset.url);
+      });
+    });
 
-/* טעינה ברירת‑מחדל */
-loadDashboard("ExecDash");        // ← החלף לשם sheet אמיתי אם שונה
-
-/* כפתור למעלה */
-const toTop=document.getElementById("toTop");
-window.addEventListener("scroll",()=>{toTop.style.display=window.scrollY>300?"flex":"none";});
-toTop.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
-</script>
+    // כפתור למעלה
+    const toTop = document.getElementById("toTop");
+    window.addEventListener("scroll",()=>{ toTop.style.display = window.scrollY>300 ? "flex":"none"; });
+    toTop.onclick = ()=> window.scrollTo({top:0,behavior:"smooth"});
+  </script>
 
 </body>
 </html>
