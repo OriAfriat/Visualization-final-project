@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>El‑Al • Maintenance BI</title>
+
+<!-- Tableau API -->
+<script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+
+<style>
+/* RESET + בסיס */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f0f4ff;color:#333;direction:rtl;text-align:center}
+
+/* כותרת */
+header{background:#083ca3;color:#fff;padding:40px 10px}
+header h1{font-size:clamp(26px,5vw,38px);margin-bottom:8px}
+
+/* כפתורים */
+nav{margin:30px 0;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+nav button{padding:10px 22px;border:none;border-radius:25px;cursor:pointer;font-weight:bold;
+           background:#ddd;transition:.3s}
+nav button:hover,nav button.active{background:#ffc400;color:#000}
+
+/* מיכל ה‑Viz */
+#viz{
+  width:95%;max-width:1200px;height:650px;margin:0 auto 60px;
+  border:1px solid #ccc;border-radius:10px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.2)
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📊 מערכת דשבורדים – תחזוקת מטוסים</h1>
+  <p>בחר דשבורד להצגה:</p>
+</header>
+
+<nav>
+  <button class="btn active" data-sheet="DashboardExec">אסטרטגי 🧭</button>
+  <button class="btn"          data-sheet="DashboardOps" >תפעולי 🛠️</button>
+  <button class="btn"          data-sheet="DashboardFin" >כלכלי 💰</button>
+</nav>
+
+<div id="viz"></div>
+
+<script>
+/* בסיס ה‑URL שלך */
+const base = "https://public.tableau.com/views/_17524132254990/sheet7";
+const prms = "?:showVizHome=no&:embed=true&:toolbar=yes";
+
+/* הטמעה ראשונית */
+let viz;                       // אובייקט Tableau
+function loadDash(sheetName){
+  /* אם כבר קיים Viz → מחליפים Sheet במקום לטעון מחדש */
+  if(viz){
+    viz.showSheet(sheetName);  // עובד אם זה אותו Workbook
+    return;
+  }
+  const url = `${base}${prms}&:sheet=${sheetName}`;
+  viz = new tableau.Viz(document.getElementById("viz"), url);
+}
+/* טען ברירת‑מחדל */
+loadDash("DashboardExec");
+
+/* טיפול בכפתורים */
+document.querySelectorAll(".btn").forEach(btn=>{
+  btn.onclick = ()=>{
+    document.querySelectorAll(".btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    loadDash(btn.dataset.sheet);
+  };
+});
+</script>
+
+</body>
+</html>
