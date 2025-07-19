@@ -3,100 +3,129 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>מרכז תחזוקת מטוסים • אל־על</title>
-  <script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+  <title>מרכז לניהול תחזוקת מטוסים • אל‑על</title>
+
   <style>
-    /* --- העיצוב שלך --- */
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-    body{
-      min-height:100vh;
+    /* Reset + בסיס */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
+    html, body { height:100%; }
+    body {
+      background: url("data:image/jpeg;base64,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
+      background-size:cover; }
+    header {
+      padding:60px 10px;
+      text-shadow: 0 2px 6px rgba(0,0,0,.4);
+    }
+    header h1 {
+      font-size:clamp(28px,5vw,46px);
       color:#fff;
-      text-align:center;
-      background:url("img/plane.jpg") center/cover fixed no-repeat;
     }
-    body::before{
-      content:"";position:fixed;inset:0;
-      background:linear-gradient(180deg,rgba(0,77,162,.8),rgba(255,255,255,.4));
-      pointer-events:none;z-index:-1;
+    header p {
+      font-size:clamp(16px,2.5vw,20px);
+      color:#eef; margin-top:8px;
     }
-    header{padding:60px 10px;text-shadow:0 2px 6px rgba(0,0,0,.3)}
-    header h1{font-size:clamp(26px,5vw,40px)}
-    nav{margin:30px 0;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
-    .navBtn{
-      background:#fff;color:#0d47a1;border:none;border-radius:25px;
-      padding:12px 26px;font-weight:700;cursor:pointer;transition:.2s;
-      box-shadow:0 3px 10px rgba(0,0,0,.2)
+
+    nav {
+      display:flex; justify-content:center; gap:16px;
+      flex-wrap:wrap; margin:30px 0;
     }
-    .navBtn.active{background:#ffc400;color:#000}
-    .navBtn:hover{transform:translateY(-3px)}
-    #viz{width:90%;max-width:1250px;height:650px;margin:0 auto 60px;
-         border-radius:12px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.4);
-         background:#fff}
-    #toTop{
-      position:fixed;right:20px;bottom:20px;width:48px;height:48px;
-      background:#ffc400;color:#000;border:none;border-radius:50%;
-      cursor:pointer;display:none;align-items:center;justify-content:center;
-      font-size:22px;box-shadow:0 4px 15px rgba(0,0,0,.4)
+    .navBtn {
+      background:rgba(255,255,255,.85);
+      color:#0d47a1; border:none; border-radius:25px;
+      padding:12px 28px; font-size:16px; font-weight:700;
+      cursor:pointer; transition:.2s;
+      box-shadow:0 3px 10px rgba(0,0,0,.2);
+    }
+    .navBtn.active {
+      background:#ffc400; color:#000;
+    }
+    .navBtn:hover {
+      transform:translateY(-3px);
+    }
+
+    #viz {
+      width:90%; max-width:1250px; height:650px;
+      margin:0 auto 60px; background:#fff;
+      border-radius:12px; overflow:hidden;
+      box-shadow:0 8px 28px rgba(0,0,0,.3);
+    }
+
+    #toTop {
+      position:fixed; right:20px; bottom:20px;
+      width:48px; height:48px; background:#ffc400;
+      color:#000; border:none; border-radius:50%;
+      display:none; align-items:center; justify-content:center;
+      font-size:24px; cursor:pointer;
+      box-shadow:0 4px 15px rgba(0,0,0,.3);
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>📊 מרכז ניהול תחזוקת מטוסים – אל־על</h1>
-    <p>בחר דשבורד להצגה:</p>
+    <h1>מרכז לניהול תחזוקת מטוסים של אל‑על</h1>
+    <p>בחר דשבורד בהתאם לצורך ✈️</p>
   </header>
 
-  <!-- שלושת הכפתורים, כשבכל data-urlאת ה‑src שמעתיק מ‑Embed -->
   <nav>
     <button class="navBtn active"
+      data-url="https://public.tableau.com/views/_17524132254990/sheet5?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link">
+      דשבורד למנהלים בכירים
+    </button>
+    <button class="navBtn"
       data-url="https://public.tableau.com/views/_17524132254990/sheet6?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link">
       דשבורד לצוות אחזקה
     </button>
-
     <button class="navBtn"
-      data-url="https:https://public.tableau.com/views/_17524132254990/sheet5?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link">
-      דשבורד למנהלים בכירים
-    </button>
-
-    <button class="navBtn"
-      data-url="https://public.tableau.com/views/_17524132254990/דשבורדכלכלילמנהליכספים?:showVizHome=no&:embed=true&:toolbar=no">
+      data-url="https://public.tableau.com/views/_17524132254990/sheet7?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link">
       דשבורד למנהלי כספים
     </button>
   </nav>
 
-  <!-- כאן נטען ה‑Viz -->
-  <div id="viz"></div>
-  <button id="toTop" aria-label="חזרה למעלה">⬆️</button>
+  <div id="viz">
+    <!-- זוהי ה-iframe דיפולטיבי -->
+    <iframe 
+      src="https://public.tableau.com/views/_17524132254990/sheet5?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
+      width="100%" height="100%" frameborder="0"></iframe>
+  </div>
+
+  <button id="toTop" aria-label="חזרה לראש הדף">⬆️</button>
 
   <script>
     const vizDiv = document.getElementById("viz");
-    let   vizObj = null;
+    let   currentIframe = vizDiv.querySelector("iframe");
 
-    // טוען/מפנה קודם ואז יוצר Viz חדש
-    function loadViz(url){
-      if (vizObj) vizObj.dispose();
-      vizObj = new tableau.Viz(vizDiv, url);
-    }
-
-    // התקנה ראשונית
-    loadViz(document.querySelector(".navBtn.active").dataset.url);
-
-    // טיפול בכפתורים
-    document.querySelectorAll(".navBtn").forEach(btn=>{
-      btn.addEventListener("click",()=>{
-        // סגנון פעיל
-        document.querySelectorAll(".navBtn").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".navBtn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        // סגנון
+        document.querySelectorAll(".navBtn")
+          .forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
-        // טעינה
-        loadViz(btn.dataset.url);
+
+        // החלפת ה-iframe
+        const url = btn.dataset.url;
+        const newIframe = document.createElement("iframe");
+        newIframe.src = url;
+        newIframe.width = "100%";
+        newIframe.height = "100%";
+        newIframe.frameBorder = "0";
+
+        vizDiv.replaceChild(newIframe, currentIframe);
+        currentIframe = newIframe;
+
+        // גלילה למעלה
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
     });
 
-    // כפתור למעלה
+    // show “toTop” button
     const toTop = document.getElementById("toTop");
-    window.addEventListener("scroll",()=>{ toTop.style.display = window.scrollY>300 ? "flex":"none"; });
-    toTop.onclick = ()=> window.scrollTo({top:0,behavior:"smooth"});
+    window.addEventListener("scroll", () => {
+      toTop.style.display = (window.scrollY > 300) ? "flex" : "none";
+    });
+    toTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   </script>
 
 </body>
