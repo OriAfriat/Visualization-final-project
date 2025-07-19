@@ -2,111 +2,119 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>מרכז BI • צי מטוסים</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>מרכז לניהול תחזוקת מטוסים • אל‑על</title>
 
-<!-- Tableau API -->
+<!-- Tableau JS API -->
 <script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
 
-<!-- ===== CSS ===== -->
+<!-- =====  CSS  ===== -->
 <style>
 /* Reset קצר + בסיס */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 body{
   min-height:100vh;
-  background:linear-gradient(120deg,#0d47a1 0%,#1976d2 35%,#64b5f6 100%);
-  color:#fff;direction:rtl;text-align:center;
+  color:#fff;
+  text-align:center;
+  background:url("img/plane.jpg") center/cover fixed no-repeat;
+}
+
+/* שכבת כיסוי (כחול‑לבן שקוף קל) */
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:linear-gradient(180deg,rgba(0,77,162,.8) 0%,rgba(255,255,255,.4) 100%);
+  pointer-events:none;z-index:-1;
 }
 
 /* כותרת */
-header{
-  padding:50px 15px 35px;
-  background:rgba(0,0,0,.15);
-  backdrop-filter:blur(4px);
-}
-header h1{font-size:clamp(26px,5vw,42px);margin-bottom:10px}
-header p{font-size:clamp(14px,2vw,18px);opacity:.9}
+header{padding:70px 15px 40px}
+header h1{font-size:clamp(28px,5vw,46px);margin-bottom:12px;font-weight:900}
+header p{font-size:clamp(14px,2vw,20px);opacity:.9}
 
-/* כפתורים (ניווט) */
-nav{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:35px 0}
+/* כפתורים */
+nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:35px 0}
 button.navBtn{
-  background:#ffeb3b;color:#212121;border:none;border-radius:30px;
-  padding:12px 26px;cursor:pointer;font-weight:700;font-size:16px;
-  transition:.25s;box-shadow:0 3px 8px rgba(0,0,0,.25);
+  background:#ffffffcc;color:#0d47a1;border:none;border-radius:30px;
+  padding:12px 28px;cursor:pointer;font-weight:700;font-size:17px;
+  transition:.25s;box-shadow:0 3px 10px rgba(0,0,0,.25)
 }
 button.navBtn:hover,
-button.navBtn:focus{transform:translateY(-3px);outline:2px solid #fff}
-button.navBtn.active{background:#ffc107;color:#000}
+button.navBtn:focus{transform:translateY(-3px);outline:none;background:#fff}
+button.navBtn.active{background:#ffeb3b;color:#000}
 
-/* מיכל Viz */
+/* תיבת Tableau */
 #viz{
-  width:95%;max-width:1250px;height:650px;margin:0 auto 60px;
-  background:#fafafa;border-radius:14px;overflow:hidden;
-  box-shadow:0 8px 28px rgba(0,0,0,.4);
+  width:95%;max-width:1250px;height:650px;margin:0 auto 80px;
+  background:#eef4ff;border-radius:14px;overflow:hidden;
+  box-shadow:0 6px 25px rgba(0,0,0,.35)
 }
 
 /* כפתור “למעלה” */
 #toTop{
   position:fixed;right:18px;bottom:18px;width:46px;height:46px;
-  background:#ffeb3b;border:none;border-radius:50%;cursor:pointer;
-  display:none;align-items:center;justify-content:center;
-  font-size:22px;color:#212121;box-shadow:0 4px 15px rgba(0,0,0,.4)
+  background:#ffeb3b;color:#000;border:none;border-radius:50%;cursor:pointer;
+  display:none;align-items:center;justify-content:center;font-size:22px;
+  box-shadow:0 4px 15px rgba(0,0,0,.4);z-index:1000
 }
-#toTop:hover{transform:scale(1.08)}
-footer{padding:20px 0;font-size:14px;color:#eee}
+#toTop:hover{transform:scale(1.1)}
+footer{padding:18px 0;font-size:14px;color:#e0f2ff}
 </style>
 </head>
 <body>
 
 <header>
-  <h1>📊 מרכז ניהול תחזוקת מטוסים</h1>
-  <p>בחר דשבורד להצגה בהתאם לצורך</p>
+  <h1>מרכז לניהול תחזוקת מטוסים של אל על</h1>
+  <p>בחר דשבורד בהתאם לצורך ✈️</p>
 </header>
 
-<!-- ===== ניווט ===== -->
-<nav aria-label="Primary">
-  <button class="navBtn active" data-sheet="DashboardExec" aria-label="דשבורד למנהלים בכירים">דשבורד למנהלים בכירים</button>
-  <button class="navBtn"          data-sheet="DashboardOps"  aria-label="דשבורד לצוות אחזקה">דשבורד לצוות אחזקה</button>
-  <button class="navBtn"          data-sheet="DashboardFin"  aria-label="דשבורד לצוות אחזקה">דשבורד לצוות אחזקה</button>
+<!-- כפתורי ניווט -->
+<nav>
+  <button class="navBtn active" data-sheet="ExecDash">דשבורד לצוות אחזקה</button>
+  <button class="navBtn"          data-sheet="OpsDash" >דשבורד למנהלים בכירים</button>
+  <button class="navBtn"          data-sheet="FinDash" >דשבורד למנהלי כספים</button>
 </nav>
 
 <!-- Tableau Container -->
 <div id="viz" role="region" aria-label="Tableau Dashboard"></div>
 
+<!-- כפתור למעלה -->
 <button id="toTop" aria-label="חזרה לראש הדף">⬆️</button>
 
-<footer>© 2025 El‑Al Airlines • Aircraft Maintenance BI Portal</footer>
+<footer>© 2025 El Al Airlines • Aircraft Maintenance BI Portal</footer>
 
-<!-- ===== JS ===== -->
+<!-- =====  JS  ===== -->
 <script>
-/* קישור בסיסי – זהה לכל הדשבורדים (אותו Workbook) */
+/* קישור בסיסי ל‑Workbook שלך */
 const base  = "https://public.tableau.com/views/_17524132254990/sheet7";
 const prms  = "?:showVizHome=no&:embed=true&:toolbar=no";
-const vizDiv= document.getElementById("viz");
-let viz;
 
-/* טעינה ראשונית */
-loadDash("DashboardExec");
+const vizDiv=document.getElementById("viz");
+let   vizObj=null;
 
-/* טיפול בכפתורי הניווט */
+/* טעינה/החלפה */
+function loadDashboard(sheetName){
+  if(vizObj){vizObj.dispose();vizObj=null;}
+  const url=`${base}${prms}&:sheet=${sheetName}`;
+  vizObj=new tableau.Viz(vizDiv,url,{width:"100%",height:"100%"});
+}
+
+/* טיפול בכפתורים */
 document.querySelectorAll(".navBtn").forEach(btn=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".navBtn").forEach(b=>b.classList.remove("active"));
     btn.classList.add("active");
-    loadDash(btn.dataset.sheet);
+    loadDashboard(btn.dataset.sheet);
   });
 });
 
-/* פונקציית טעינה/החלפה */
-function loadDash(sheetName){
-  if(viz){ viz.showSheet(sheetName); return; }          // החלפה מהירה
-  viz = new tableau.Viz(vizDiv, `${base}${prms}&:sheet=${sheetName}`);
-}
+/* טעינה ברירת‑מחדל */
+loadDashboard("ExecDash");        // ← החלף לשם sheet אמיתי אם שונה
 
 /* כפתור למעלה */
-const toTopBtn = document.getElementById("toTop");
-window.addEventListener("scroll",()=>{toTopBtn.style.display = window.scrollY>300 ? "flex" : "none";});
-toTopBtn.onclick = ()=>window.scrollTo({top:0,behavior:"smooth"});
+const toTop=document.getElementById("toTop");
+window.addEventListener("scroll",()=>{toTop.style.display=window.scrollY>300?"flex":"none";});
+toTop.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
 </script>
 
 </body>
