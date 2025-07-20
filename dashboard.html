@@ -1,86 +1,169 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>מרכז לניהול תחזוקת מטוסים של אל-על ✈️</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>✈️ דשבורדים ניהוליים - אל על</title>
   <style>
-    /* --- רקע מטוס בשמיים --- */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      color: #003366;
-      /* רקע מטוס (Base64) + הגדרת גרדיאנט שקוף מעל */
-      background:
-        linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)),
-        url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIQEhAQEBIVFRUVEA8VFRAVFRUVFRUVFRUWFhUVFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLysBCgoKDg0OGBAQGi0mHyUtLS0rLS0tLS0vLS0tLS0tLS0tLS0uLS8rLS0tLS0tLSstLS0tLS0tLS0tLSstLS0tLf/AABEIALEBHQMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAAAQIDBAUGB//EAEMQAAEDAQQGCAQFAgUDBQEAAAEAAgMRBBIhMQUTQVFhkQYUIjJxgaGxB0JywTNSYtHwguEWI0OislNzkiREg8LxFf/EABoBAAMBAQEBAAAAAAAAAAAAAAABAgMEBQb/xAAvEQACAQIFAgUDAwUAAAAAAAAAAQIDEQQSEyExQVEiMkKRoWFxgbHR8AUUweHx/9oADAMBAAIRAxEAPwDz5CEL7Q8AEoSJQgASJSkQAIQhACJCnJpQhghCRMAQUIKYxEFCCgASFKkKBghCEwBCEIAEIQgAQhCABCEIAEqRKkwBKkSoEIlSJUAKhIlSEOQhCQgShIlCABIlKRAAhCEACaUqQoQwSJUJgIgoQmMRBQhAAkKVIgAQhCYwQhCABCEIAEIQgAQhCABKkSpMASpEIECVIlQAIQhIQ9CEJCBKkQgBUiEIAEIQgBEhSoKEMRIhCoAQhCAEQlSIGCEIQAiEqEDEQhCYAhXdE6ItFreWWaJ8jhndGDRvc7JvmV3UHwyZZ4jadKWtsMbRVzIhedjk2+4YuOV0NNdixq4inTdpPfty/Y0hSlLhHnCFtae0lZXjVWKytiiBrrZCZLRJTaXEkRj9LeexYq0hJyV2rEySTtcEISp3JESoQgQIQUBACoQiqABCEIEPQhCkQIQlQAiFJDC55usa5x/K0Fx5BacPRi3PxbZJ/OJ7fcBTKcY8sai3wjIQtw9ELeP/AGk3/iqs3R62M71lnHHUyU5gJKrB8SXuPJLsZhQpZYHM77XN+ppHuolYhqE6iSioBEJ1ElEAIkTrqLqAuNSp11F1AXGUQpoYHPcGMaXOOAY0FzidwAxK7vo78LbTPR9qcLOz8uDpT/Tk3zNeCxq16dJXm7FwhKflRwEUTnkNY0ucTQNaCXE7gBiSvReinwsllpLbiYmYHUtI1jvqOTBzPgvS+j/ReyWAUs8QDqUdK7tSO8XHIcBQcFLp3Tcdkjc95Dn3HOZAHMbJJT8gcRX+UByXkVv6lOo8lFW+vX/R2ww0Y7zI5X2TRVmJo2GFmwDFzjkAM3vPM7d68N6ZdK5dJS3n1bE0nVQVqGj8zt7ztPkFH0m6Qz6Ql1s5wFRHEO5G3cBtO92Z8KAY9xduDwWl457y/T+dznrYjN4Y8EVEUUl1JdXoHPcYhPuouoC4yiE+6i6gLjFf0PomW1P1cQ+p5wYwb3O2LU6K9Eprc6vciB7Uh28G7/H3yXS2noCJXah1rYxrGtd1aOMkhriQHOLnYklp7RGNNgoFx18XCF4p7m9Ok5b9CWwf/wArRrO0+O0T/M+6JSDuY3EMHHPis/TvTMOjcIYmtvVAc5rajeQBlTx8ls2L4d2OLGQySU/O+63D6AD6rz3pBao5Z3mBjWRN7MbWilWj5jvJNTjvA2Llw0IVp3d2+74LquUUrbIzEJaIovWOUmuIuq7qUmpUnPqor2ezPkc1jGlznEBrWgkk7gAuu6I6Cjjtsdm0nZpb8t7Usw1XYDi50hBxHZoKE54gAgm58OrfBZnSF7f85xAa807m1ra5Gue/BegHpC3cV5WNxFRN04qy7no4aEGs7ZswQMhaGwxsYBQBrWho3bFJ1ijXOcO6CSBjkK4Ln59OtIwBPAYGlCMD5qCPSUerkjAewP1taOo8GSpc4OBNDUkgg4LydKT5O/URLoXpfr7rZI4YnuY5zI+stJN0x1YQWDtdt2Ve7xw05OkULGhz7za3KN7JJvm6wDHaboHF7d6xn2wONRPMMT2SWubi+N2TgdkZaNwkftNQ1rmk1dJG8Xmkh8EZPelLsQMy2RrOAZ+oodP6BnRvWTTcE0bJmh+reBRxjdQVDCA6gNK3xwqCo7cbBdvz9Xu4dqRrKY3qVLh+l3JYtkhDIpABAX6ttwN1kUZkEYqXNa43QZKkXRUCmZFU+eJxvNjbdYXOJEUrWgm/FdJY9hFaX3H/ALbRjVJRa4uPMmXLH0e0VaWiWCGyyNDqayG4QHDZejNKioVaf4baNd/oFv0ySj0vUVt2moo429ZlbG4FwJkljDnXSWtc4toKuADqAClabFS/x7YI2tJnqT8rWue4ChIvXAc8Bt7wWkZV/S5fJLVPqkULR8KLE7uvnZ4PaR/uaVQn+EMf+nanj6mNd7ELal+JdiHc1z8u7GBnWnfc3cVny/FmAd2zyn6jG32JXTCeNfDf5t/kxlHD9bGNN8Iph3LTG76mOb7ErPm+FlubkYXeD3fdgXSN+KMrzSHRr35ZPcTjWmDY+B5KzD010k/u6Jd5ue3/AJNC6FUx0fNb8uP7mWnh3xf5OFf8O9IAgagEE94SR0HE419F0uhfhW3B1sn/APiiBHkZHj2Hmuqs3SHSD+9ot7eOviPo4t91cbPbn5NZFwfAJKebLUPZZ1MXiGrOUV9mn+lyoUKad7N/df8AC1obQ1lsbbtmjYzChcMXu+p5q481pVXPTw6V+SWwO+uG0M9pXKsyDS5wJ0Z5NtNf+QXA6ebxOa9zqUrbJEXSbpzBAJIoJGunaCAS1zomu2glubs+Fc147bp5LRI6WZ7nvdm92J8OA4DAL15/Ra1P78GijxEE1eesUL+gT3d6KxD6GWpvtMvRw1fD0Ftz3/ljir0a9V/Q8g1KNSvWJPhqHfMxn0az/wC5KgZ8Lj81pHkwj3OK7F/UaHf4ON4PELp8nlhhSaleoSfC5/y2hvmw/uqUvwztQPZfE4eLgeRbT1VrHYd+ol4fEL0nnepSaldpaegttZX/ACbw3tc018qqh/hyetHsuby8htPEHH0WqxFJq6kvczy1U7ZX7HNaldn0S6DOmIltILYxiI9rvq/bnuNfR9u0fY5KzF8zxtia0tB3Auc3mK+S6NvxNsho1kM+4CkYHo8rlxFarJZaUX9/2OyhTivFUf4NnpO8wWRzLM2QP7IjETHuNWkHtXBUNoKE8cFydmsEdqlsstmjtEkZd/6m0vkc3WgtbgbzsaFjL10UpVorstaT+I7WUuWcnKl6QN9A0rLZ00tjgBDZ4omAYNbG95HnUNA8lwxo1Yxs18nSq1OW6ZvfELS2pg1DDR8wINPljHe593nuXluqXcf4Y0jbna6SM1IADpLsdQMg1uGHksfS+gZbK/VzBodStGva7DiGnDzXpYRU6cdNSTl13OCvUm3ncWo9Dn9UjVLR6ujq67Dm1kaRsSb1JdCbKk6qsNQWkjnupK7ZrRNHg15puPaHlXLyWn1VKLKlKSkrNXKjFx3TsMh0u/5mA8QSPeqtM0o05tcPIH7qEWVPFlXPKhSfQ3jWqrqTnSDQKip4AEH1wWZbNOTj8Kzk8XPb/wAR+6vCyp3VlH9vTRbxFT6HJWvTGknYAFnCOP7uqVRfo3SM/wCI6Ug/9SQgf+Nfsu8FmT2wEZJulby29hxrv1HE2HobKO+9orSoDSd+0lu8rWg6GxVF9zjkKXqNAAoMhXZvXRhjt55rR0Do11pke0uLWtbi6gNTWgA9eSwq54LM5G9OpGbyqJnWTo9o+ANMgaakDEF2J33rxpxXXaM0ZZ3NDoI4HNBbS7dwLSC2ooKEEA+SZJ0Pbida8j8tGgc6FUxoB1ndrIppIzxjvNPiWE4eS8+dRT9TO2MXHobA0VGCD1ZlRcoWgA9i/d7u7WyU+oqA6Lga24GzRC7dF2SRt0ajq4u44UZSm4i9nikh6RiMhtoLTXKWKrm/1MIvM5FblntTJG3o3Bzd7SCPRYNSXJommZ3ValxZPMK6zC81wF7V0IBGzVmn/cfvwcYJwaic0v1o6Jp7JmDy2op/p1jB/qxKvvs7HZtHlgeYUZsxHce4cD2h64+qWYdivZpJWk657CLjaUaWG/eeXE1NKXTGAN7Xb8I5bSLwo0GrgC+oFBUiu85AeaS3aREJa2a7VwNCKmtM6imCw7bLZ39phLHb21Da8WjArSMc29iJSsbdo0s5msIge4NEhbcLCXhsbXC6CRQucXMAO1tcinu001pIMcoprO1cJBuOY2oIO2/Ubw1x2LkOuuGF4jzz8E8W+QZPK00URqs7Fmm4q0vkdojFrhjrdTtG1+A355YqWPS0bqASMNbtBUVN5zmtz3ua4DwK45mlpBmap40qcCWNNKY0GypHKp5pOgPVO1itbXYtLXCgNQQcDkcNhT9ZwXF2bSjY8GxhvZa3sgDstBDRhsAJooYLbE25die26IQAH5CJrmxigccAHHx2qdBj1UdrJPdz9ifZDZA4YgU3EfYhcjFpdsTI42l9Gsa0F1+R1G3R2nZk0GZUtk0yGsa0uc4gUvO7zuJyxKWix6iOil0fA7ONvlh7Kq/QcR7tB4taR6UKzH6XDxdD7p3nBUDpp0dQ6N5NRi2RpHq3JPTkuBZ0zoGaLLDUMjd4G67yBw9VassIBqWXSN9PQjBYti6SRGl50rD+poc3/atqzW1kn4czHcBnyrX0UPMuS1boZ/SbTwsrSyOjpnDAZhgPzO+w2+C8ymgL3Oe8lznElzjiSTtJXZ9OopyGXIAaPcTNHdHZpQB5dlnkdy5+ywPLf8xt01yqDh5L18A4Rhst+rPJx0ZSl4nt0RkGxcEnURuW91ZJ1ZehqHDpou9XSdXWsbOk6vwXHqHZkMrq6OrrU1CNQjUFkMwQJwgWlqEogRqBkM4QJdQtIQJRAlqBkM3UJdQtMWdL1dLVDIZmoU2htKNgFpoKuBFG7yC7BXhZ1Xm0IxxL8Q40rTI02kFY1nnVjeh4Hc3o9MxkDtAZVFVKNKRmovZU3+m/LYuYOhHH5jywSHQbjhew8PsuN0EdarHD6S07I1xuFsl+WRzoyaFpLvlF1tc8qNyyrgtjRXWHASsbcr8zXvYfMOY11PLmum0R0ejszGtja28GgOkDQ1z6b6K71I7lvFRtuYznLoivZtK2llAXtk+ttD5ObT1BV+LpB/1IXDixzXD/AHXSmx6OO1WI9Gt2iqmcaL6ew4SrGZpe0Weeji5zXAU7UbyKcSB7FYzmMBzB4gO/ZdmLI0bE7qzdrRyCmNVQVlv9ypU3N3e32ONhZFtcOR/ZWrln2u5NefYLp32VhzY0+LQhsYbkAPAAJSq36FxpW6mBFomKQVbfHi1zf+TUj+j+5x8wuhShRnZeQ5h+gH7HD2/dV36FlG1p8z+y7ABLQJqoS4HFnRrxn7FN6mdp9F2xjCY6ztOwLRVY9UZypy6M43qfEpRYxuXWvsLDsVZ+jRsWsatPsZSp1O5zoso3BDrKDmByW06wEbECxlaqrHoYunLqULPaZo8GvJH5XdoeGOIHgQifVvxMdx20sPZJ+g5c1fNlTOq8FKcL3Ww3ntZ7mQYEaha3Vt4Q6yrXVM9Mvuh4Jhh4LTLAkuBefqnoaZl6nggWeuxaurCURhPWYtEzRYil6mpQNTgFLrMrRRltsaeLH48lpgJaKHWkPRiZ7LIPylPNnH5SVeoiinUZSpoptg/RTzS6mnyq2hLOx5EU3Rfp9U1rDtaPJXCmpqbDIiCn6UY/lHNTJtU7hYjq78o5/wBk5pO0J1UVQFhEiWqaSgYjgmFqdfRfCBjLqUNKeCnApAMDSlup18JDIEAKAlTA5OBTEKmknY31TqpaoCxHV35RRR' 
-        ) no-repeat center center fixed;
-      background-size: cover;
+      background: linear-gradient(to left, #007C91, #00B3B3);
+      color: white;
+      text-align: center;
+      direction: rtl;
     }
 
     header {
-      background: rgba(0, 71, 158, 0.8);
-      color: white;
-      padding: 30px 10px;
-      font-size: 2em;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      padding: 50px 20px;
+      background: linear-gradient(to left, #0099A8, #00CED1);
+      color: #ffffff;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 3em;
     }
 
     h2 {
-      margin-top: 20px;
-      color: #01579b;
+      margin-top: 10px;
+      font-size: 1.6em;
+      color: #ffffff;
     }
 
-    .buttons {
+    .buttons-container {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
-      flex-wrap: wrap;
-      margin: 30px;
+      margin: 30px 0;
     }
 
-    a.button {
-      text-decoration: none;
-      background: linear-gradient(to right, #42a5f5, #1e88e5);
-      padding: 15px 25px;
-      border-radius: 8px;
-      font-size: 1em;
-      color: white;
-      transition: transform 0.2s, background 0.3s;
+    button {
+      padding: 20px 40px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 40px;
+      background: #ffffff;
+      color: #007C91;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      min-width: 250px;
     }
 
-    a.button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(to right, #1e88e5, #1565c0);
+    button:hover {
+      background: #dffcff;
+      transform: scale(1.08);
     }
 
-    .note {
-      margin-top: 40px;
-      font-size: 1em;
-      color: #555;
+    .dashboard {
+      display: none;
+      padding: 0 20px;
+      margin: 40px auto;
+      max-width: 1200px;
+    }
+
+    .tableauPlaceholder {
+      margin: 0 auto;
+      max-width: 1200px;
+    }
+
+    .tableauViz {
+      width: 100%;
+      height: 900px;
+      display: none;
+    }
+
+    footer {
+      padding: 40px 20px;
+      background-color: #006D75;
+      color: #ccc;
+      font-size: 0.9em;
     }
   </style>
 </head>
-
 <body>
-  <header>✈️ מרכז לניהול תחזוקת מטוסים של אל-על</header>
 
-  <h2>בחר דשבורד בהתאם לצורך ⚙️</h2>
+  <header>
+    <h1>✈️ מערכת דשבורדים ניהולית - אל על</h1>
+    <h2>בחר את הדשבורד לפי תחום העיסוק שלך</h2>
+  </header>
 
-  <div class="buttons">
-    <a class="button"
-       href="https://public.tableau.com/views/_17524132254990/sheet5?:language=en-US&publish=yes&:display_count=n"
-       target="_blank">דשבורד למנהלים בכירים</a>
-
-    <a class="button"
-       href="https://public.tableau.com/views/_17524132254990/sheet6?:language=en-US&publish=yes&:display_count=n"
-       target="_blank">דשבורד לצוות אחזקה</a>
-
-    <a class="button"
-       href="https://public.tableau.com/views/_17524132254990/sheet7?:language=en-US&:display_count=n"
-       target="_blank">דשבורד למנהלי כספים</a>
+  <div class="buttons-container">
+    <button onclick="showDashboard('vizExecutives')">🔷 דשבורד למנהלים בכירים</button>
+    <button onclick="showDashboard('vizMaintenance')">🛠️ דשבורד לצוות אחזקה</button>
+    <button onclick="showDashboard('vizFinance')">💰 דשבורד למנהלי כספים</button>
   </div>
 
-  <p class="note">👆 כל כפתור יפתח את הדשבורד בחלון חדש של Tableau Public</p>
+  <!-- דשבורד מנהלים בכירים -->
+  <div class="dashboard" id="vizExecutives">
+    <div class="tableauPlaceholder" id="viz1752973398002" style="position: relative">
+      <noscript>
+        <a href="#"><img alt=" " src="https://public.tableau.com/static/images/_1/_17524132254990/sheet5/1_rss.png" style="border: none" /></a>
+      </noscript>
+      <object class="tableauViz">
+        <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+        <param name="embed_code_version" value="3" />
+        <param name="site_root" value="" />
+        <param name="name" value="_17524132254990/sheet5" />
+        <param name="tabs" value="yes" />
+        <param name="toolbar" value="yes" />
+        <param name="language" value="en-US" />
+      </object>
+    </div>
+  </div>
+
+  <!-- דשבורד אחזקה -->
+  <div class="dashboard" id="vizMaintenance">
+    <div class="tableauPlaceholder" id="viz1752973386379" style="position: relative">
+      <noscript>
+        <a href="#"><img alt=" " src="https://public.tableau.com/static/images/_1/_17524132254990/sheet6/1_rss.png" style="border: none" /></a>
+      </noscript>
+      <object class="tableauViz">
+        <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+        <param name="embed_code_version" value="3" />
+        <param name="site_root" value="" />
+        <param name="name" value="_17524132254990/sheet6" />
+        <param name="tabs" value="yes" />
+        <param name="toolbar" value="yes" />
+        <param name="language" value="en-US" />
+      </object>
+    </div>
+  </div>
+
+  <!-- דשבורד כספים -->
+  <div class="dashboard" id="vizFinance">
+    <div class="tableauPlaceholder" id="viz1752973297713" style="position: relative">
+      <noscript>
+        <a href="#"><img alt=" " src="https://public.tableau.com/static/images/_1/_17524132254990/sheet7/1_rss.png" style="border: none" /></a>
+      </noscript>
+      <object class="tableauViz">
+        <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+        <param name="embed_code_version" value="3" />
+        <param name="site_root" value="" />
+        <param name="name" value="_17524132254990/sheet7" />
+        <param name="tabs" value="yes" />
+        <param name="toolbar" value="yes" />
+        <param name="language" value="en-US" />
+      </object>
+    </div>
+  </div>
+
+  <footer>
+    אל על - כל הזכויות שמורות © 2025
+  </footer>
+
+  <script type="text/javascript">
+    function showDashboard(id) {
+      document.querySelectorAll('.dashboard').forEach(el => el.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+
+    const scriptElement = document.createElement('script');
+    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+    document.body.appendChild(scriptElement);
+  </script>
+
 </body>
 </html>
